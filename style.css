@@ -241,40 +241,37 @@ canvas {
 
 #touch-controls {
   display: none;
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 12px;
+  position: relative;
+  width: 100%;
   z-index: 40;
   align-items: center;
   justify-content: center;
+  margin-top: 10px;
   user-select: none;
-  pointer-events: none;
 }
 
 #touch-controls .dpad {
   display: grid;
-  grid-template-columns: repeat(3, 58px);
-  grid-template-rows: repeat(3, 58px);
-  gap: 8px;
-  padding: 8px;
+  grid-template-columns: repeat(3, 64px);
+  grid-template-rows: repeat(3, 64px);
+  gap: 10px;
+  padding: 10px;
   border-radius: 16px;
   background: rgba(10, 8, 0, 0.35);
   backdrop-filter: blur(2px);
-  pointer-events: auto;
 }
 
 #touch-controls .tc-btn {
-  width: 58px;
-  height: 58px;
+  width: 64px;
+  height: 64px;
   border: 1px solid rgba(245, 200, 66, 0.55);
   border-radius: 14px;
   background: rgba(10, 8, 0, 0.78);
   color: #f5c842;
   font-family: 'Courier New', monospace;
-  font-size: 11px;
+  font-size: 26px;
   font-weight: 700;
-  letter-spacing: 0.8px;
+  line-height: 1;
   touch-action: none;
 }
 
@@ -313,10 +310,9 @@ canvas {
 @media (max-width: 600px) {
   body {
     justify-content: flex-start;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     min-height: 100svh;
-    padding-bottom: calc(120px + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
   }
 
   #hud, #footer-hud {
@@ -329,24 +325,37 @@ canvas {
     min-height: 220px;
   }
   .overlay {
-    justify-content: flex-start;
-    gap: 12px;
-    padding: 16px 10px 18px;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 10px;
+    overflow: hidden;
   }
   .overlay h1 {
-    font-size: 28px;
+    font-size: 25px;
     letter-spacing: 2px;
   }
   .overlay .sub {
-    font-size: 10px;
+    font-size: 9.5px;
     max-width: 90vw;
-    line-height: 1.55;
+    line-height: 1.45;
+  }
+  #screen-start .tagline {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+  #screen-start .controls-grid {
+    gap: 4px 10px;
+    font-size: 9px;
+  }
+  #screen-start .controls-grid .key {
+    font-size: 9px;
+    padding: 2px 6px;
   }
   .btn {
-    padding: 10px 16px;
-    font-size: 12px;
-    letter-spacing: 2px;
-    width: min(86vw, 320px);
+    padding: 9px 14px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    width: min(82vw, 300px);
   }
   #credits {
     right: 8px;
@@ -374,19 +383,20 @@ canvas {
 
   #touch-controls {
     display: flex;
-    bottom: calc(8px + env(safe-area-inset-bottom));
+    margin-top: 8px;
+    margin-bottom: calc(8px + env(safe-area-inset-bottom));
   }
 
   #touch-controls .dpad {
-    grid-template-columns: repeat(3, 54px);
-    grid-template-rows: repeat(3, 54px);
-    gap: 7px;
+    grid-template-columns: repeat(3, 60px);
+    grid-template-rows: repeat(3, 60px);
+    gap: 9px;
   }
 
   #touch-controls .tc-btn {
-    width: 54px;
-    height: 54px;
-    font-size: 10px;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
   }
 }
 
