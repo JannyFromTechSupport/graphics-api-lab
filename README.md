@@ -2,7 +2,7 @@
 
 > *For all time. Always.*
 
-A browser-based arcade game built with **HTML5 Canvas**, **CSS**, and **vanilla JavaScript** as part of a Multimedia Applications assignment. No frameworks, no libraries — just the web platform.
+A browser-based arcade game built with **HTML5 Canvas**, **CSS**, and **vanilla JavaScript.** 
 
 🎮 **[Play Now →](https://jannyfromtechsupport.github.io/graphics-api-lab)** 
 
