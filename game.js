@@ -32,8 +32,8 @@ function resizeCanvas() {
   drawBackground();
 }
 
-window.addEventListener("resize", resizeCanvas);
-window.addEventListener("orientationchange", resizeCanvas);
+globalThis.addEventListener("resize", resizeCanvas);
+globalThis.addEventListener("orientationchange", resizeCanvas);
 document.addEventListener("DOMContentLoaded", resizeCanvas);
 
 // Audio Engine (Web Audio API) 
@@ -42,7 +42,8 @@ let audioCtx = null,
 
 function initAudio() {
   if (audioCtx) return;
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const AudioCtx = globalThis.AudioContext || globalThis.webkitAudioContext;
+  audioCtx = new AudioCtx();
 }
 
 function playTone(freq, type, duration, volume = 0.15, startTime = 0) {
@@ -112,6 +113,42 @@ document.addEventListener("keydown", (e) => {
 document.addEventListener("keyup", (e) => {
   keys[e.key] = false;
 });
+
+function bindTouchControls() {
+  const movementButtons = document.querySelectorAll("#touch-controls .tc-btn[data-key]");
+  const actionButtons = document.querySelectorAll("#touch-controls .tc-btn[data-action]");
+
+  movementButtons.forEach((btn) => {
+    const key = btn.dataset.key;
+    if (!key) return;
+
+    const press = (e) => {
+      e.preventDefault();
+      keys[key] = true;
+      btn.classList.add("is-pressed");
+    };
+
+    const release = (e) => {
+      e.preventDefault();
+      keys[key] = false;
+      btn.classList.remove("is-pressed");
+    };
+
+    btn.addEventListener("pointerdown", press);
+    btn.addEventListener("pointerup", release);
+    btn.addEventListener("pointercancel", release);
+    btn.addEventListener("pointerleave", release);
+  });
+
+  actionButtons.forEach((btn) => {
+    const action = btn.dataset.action;
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (action === "pause") togglePause();
+      if (action === "mute") muted = !muted;
+    });
+  });
+}
 
 // Variant (Player) 
 // Object 1: The Variant — geometric object with movement transforms
@@ -988,6 +1025,7 @@ function gameLoop() {
 // Boot
 document.getElementById("btn-start").addEventListener("click", startGame);
 document.getElementById("btn-restart").addEventListener("click", startGame);
+bindTouchControls();
 
 drawBackground(); // Draw static background on load
 gameLoop();
