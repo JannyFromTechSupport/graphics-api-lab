@@ -84,7 +84,7 @@ Every object uses canvas transform operations:
 
 ## Audio
 
-Built with the **Web Audio API** — no external files:
+Built with the **Web Audio API:**
 
 | Sound              | Trigger              |
 |--------------------|----------------------|
@@ -107,6 +107,9 @@ tva-glitch/
     │   ├── miss-minutes.png
     │   └── infinity.png
     └── images/
+        ├── game-over-screen.png
+        ├── gameplay.png
+        └── main-menu.png
 ```
 
 ---
