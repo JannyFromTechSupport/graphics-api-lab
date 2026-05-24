@@ -116,20 +116,25 @@ document.addEventListener("keyup", (e) => {
 
 function bindTouchControls() {
   const movementButtons = document.querySelectorAll("#touch-controls .tc-btn[data-key]");
-  const actionButtons = document.querySelectorAll("#touch-controls .tc-btn[data-action]");
 
   movementButtons.forEach((btn) => {
     const key = btn.dataset.key;
     if (!key) return;
 
+    let activePointerId = null;
+
     const press = (e) => {
       e.preventDefault();
+      activePointerId = e.pointerId;
+      btn.setPointerCapture(e.pointerId);
       keys[key] = true;
       btn.classList.add("is-pressed");
     };
 
     const release = (e) => {
       e.preventDefault();
+      if (activePointerId !== null && e.pointerId !== activePointerId) return;
+      activePointerId = null;
       keys[key] = false;
       btn.classList.remove("is-pressed");
     };
@@ -137,16 +142,6 @@ function bindTouchControls() {
     btn.addEventListener("pointerdown", press);
     btn.addEventListener("pointerup", release);
     btn.addEventListener("pointercancel", release);
-    btn.addEventListener("pointerleave", release);
-  });
-
-  actionButtons.forEach((btn) => {
-    const action = btn.dataset.action;
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (action === "pause") togglePause();
-      if (action === "mute") muted = !muted;
-    });
   });
 }
 

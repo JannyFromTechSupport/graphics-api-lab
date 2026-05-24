@@ -242,38 +242,60 @@ canvas {
 #touch-controls {
   display: none;
   position: fixed;
-  left: 10px;
-  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 12px;
   z-index: 40;
-  gap: 10px;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
   user-select: none;
+  pointer-events: none;
 }
 
 #touch-controls .dpad {
   display: grid;
-  grid-template-columns: repeat(2, 44px);
-  grid-template-rows: repeat(2, 44px);
-  gap: 6px;
-}
-
-#touch-controls .tc-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  grid-template-columns: repeat(3, 58px);
+  grid-template-rows: repeat(3, 58px);
+  gap: 8px;
+  padding: 8px;
+  border-radius: 16px;
+  background: rgba(10, 8, 0, 0.35);
+  backdrop-filter: blur(2px);
+  pointer-events: auto;
 }
 
 #touch-controls .tc-btn {
-  width: 44px;
-  height: 44px;
+  width: 58px;
+  height: 58px;
   border: 1px solid rgba(245, 200, 66, 0.55);
-  border-radius: 10px;
+  border-radius: 14px;
   background: rgba(10, 8, 0, 0.78);
   color: #f5c842;
   font-family: 'Courier New', monospace;
-  font-size: 15px;
-  letter-spacing: 1px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
   touch-action: none;
+}
+
+#touch-controls .tc-btn.up {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#touch-controls .tc-btn.left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+#touch-controls .tc-btn.right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+#touch-controls .tc-btn.down {
+  grid-column: 2;
+  grid-row: 3;
 }
 
 #touch-controls .tc-btn:active,
@@ -281,11 +303,6 @@ canvas {
   background: rgba(79, 247, 176, 0.2);
   box-shadow: 0 0 10px rgba(79, 247, 176, 0.5);
   border-color: rgba(79, 247, 176, 0.9);
-}
-
-#touch-controls .tc-btn.action {
-  width: 40px;
-  height: 40px;
 }
 @media (max-width: 900px) {
   #hud, #footer-hud, #canvas-wrap {
@@ -358,6 +375,18 @@ canvas {
   #touch-controls {
     display: flex;
     bottom: calc(8px + env(safe-area-inset-bottom));
+  }
+
+  #touch-controls .dpad {
+    grid-template-columns: repeat(3, 54px);
+    grid-template-rows: repeat(3, 54px);
+    gap: 7px;
+  }
+
+  #touch-controls .tc-btn {
+    width: 54px;
+    height: 54px;
+    font-size: 10px;
   }
 }
 
